@@ -1,0 +1,5 @@
+.button {
+  @apply flex w-full justify-center rounded-full p-2 shadow transition;
+  @apply text-base font-bold select-none;
+  @apply bg-emerald-500 text-white hover:bg-emerald-600;
+}

@@ -25,7 +25,7 @@ export const LinkArea = ({ links }: Props) => {
       {(links || []).map(
         (item, index) =>
           index <= 4 && (
-            <Link href={item.href}>
+            <Link key={item.href + index} href={item.href} passHref>
               <Button.Link colorScheme={item.color}>{item.title}</Button.Link>
             </Link>
           )
