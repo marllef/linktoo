@@ -1,0 +1,31 @@
+.container {
+  @apply p-2 h-screen w-full;
+  @apply flex flex-col justify-between items-center;
+}
+
+.header {
+  @apply flex flex-1;
+}
+
+.main {
+  @apply flex w-full flex-[5] flex-col items-center;
+}
+
+.links {
+}
+
+.username {
+  @apply flex text-2xl font-semibold my-2 justify-center items-center;
+}
+
+.footer {
+  @apply flex w-full justify-center items-center;
+}
+
+.social {
+  @apply flex flex-row justify-center items-center p-2;
+}
+
+.icon {
+  @apply mx-2 text-2xl text-slate-700;
+}
