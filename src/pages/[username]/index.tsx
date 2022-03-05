@@ -14,7 +14,7 @@ import { useEffect } from "react";
 const UserLinks = () => {
   const router = useRouter();
   const { username } = router.query;
-  const { signIn, signOut } = useAuth();
+  const { signIn, signOut, createUser } = useAuth();
 
   return (
     <div className={styles.container}>
@@ -42,10 +42,10 @@ const UserLinks = () => {
         <div className={styles.social}>
           <Facebook
             onClick={async () =>
-              await signIn("marllef-alves@hotmail.com", "22051998")
+              await createUser("marllef@hotmail.com", "22051998")
             }
             className={styles.icon}
-          />  
+          />
           <Instagram
             onClick={async () => await signOut()}
             className={styles.icon}

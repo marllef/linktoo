@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import firebase, { FirebaseApp, initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import {
   Auth,
   getAuth,
@@ -8,24 +7,25 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   User,
+  Unsubscribe,
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC3WVwqsF_z43h5WJi-iLZcs7NE3TJKAIw",
-  authDomain: "instalinker-rjs.firebaseapp.com",
-  databaseURL: "https://instalinker-rjs-default-rtdb.firebaseio.com",
-  projectId: "instalinker-rjs",
-  storageBucket: "instalinker-rjs.appspot.com",
-  messagingSenderId: "74431008770",
-  appId: "1:74431008770:web:db387207717ff7c483571b",
-  measurementId: "G-BP4FLL7569",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DB_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 export class FirebaseAuth {
   private app: FirebaseApp;
   private auth: Auth;
 
-  public currentUser: User | null;
+  public currentUser: User | null = null;
 
   constructor() {
     if (!firebase?.getApps().length) {
@@ -36,23 +36,50 @@ export class FirebaseAuth {
 
     this.auth = getAuth(this.app);
     this.currentUser = this.auth.currentUser;
+    this.auth.onAuthStateChanged((user) => (this.currentUser = user));
   }
 
   public async signIn(email: string, password: string) {
-    const { user } = await signInWithEmailAndPassword(
-      this.auth,
-      email,
-      password
-    );
-    this.currentUser = user;
-    console.log(user.email, "logado com sucesso!");
+    try {
+      const { user } = await signInWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+      this.currentUser = user;
 
-    return user;
+      return user;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
   }
 
-  public async createUser(email: string, password: string) {
-    return (await createUserWithEmailAndPassword(this.auth, email, password))
-      .user;
+  public onAuthChange(observer: any, error?: any, completed?: any) {
+    return this.auth.onAuthStateChanged(observer, error, completed);
+  }
+
+  public async createUser(name: string, email: string, password: string) {
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+
+      await fetch("/api/auth", {
+        method: "POST",
+        body: JSON.stringify({
+          name: name,
+          email: user.email,
+          uid: user.uid,
+        }),
+      });
+
+      return user;
+    } catch (err: any) {
+      console.log(err.message);
+      throw new Error(err.message);
+    }
   }
 
   public async signOut() {

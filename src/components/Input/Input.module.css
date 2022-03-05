@@ -1,6 +1,6 @@
 .input {
-  @apply appearance-none rounded-lg relative block w-full h-12 px-3 py-2 border mb-2;
-  @apply text-lg;
+  @apply appearance-none rounded-lg relative block w-full px-3 py-2 border mb-2;
+  @apply text-base;
   @apply border-white placeholder-gray-500 text-gray-900 text-center font-semibold;
   @apply focus:ring-sky-300 focus:ring focus:z-10 focus:outline-none;
 }

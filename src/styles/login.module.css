@@ -1,0 +1,21 @@
+.container {
+  @apply flex flex-col justify-center items-center min-w-[320px] h-screen overflow-hidden;
+  @apply bg-gradient-to-b from-cyan-500 to-blue-500;
+}
+
+.main_content {
+  @apply flex flex-col w-full min-w-max justify-center items-center;
+  @apply sm:px-[7rem]  md:px-[10rem] lg:px-[28rem] xl:px-[45rem];
+}
+
+.user_icon {
+  @apply flex rounded-full bg-white p-3 text-sky-500 mb-1;
+}
+
+.label_page {
+  @apply mb-5 text-white text-3xl font-bold text-center;
+}
+
+.form {
+  @apply w-full px-10;
+}

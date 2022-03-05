@@ -10,11 +10,10 @@ import { useAuth } from "~/hooks/useAuth";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
-const Login: NextPage = () => {
-  const { signIn, currentUser } = useAuth();
-  const router = useRouter();
+const Register: NextPage = () => {
+  const { createUser, currentUser } = useAuth();
   const formRef = useRef(null);
-
+  const router = useRouter();
   const toast = useToast({
     title: "Erro ao autenticar",
     status: "error",
@@ -25,8 +24,12 @@ const Login: NextPage = () => {
 
   async function handleSubmit(data: any) {
     try {
-      const user = await signIn(data.email, data.senha);
-      router.replace("/");
+      if (data.senha === data.rsenha) {
+        const user = await createUser(data.name, data.email, data.senha);
+        router.replace("/").then(() => console.log(user?.email, "logado!"));
+      } else {
+        throw new Error("As senhas não batem!");
+      }
     } catch (err: any) {
       if (!toast.isActive(err.message)) {
         toast({
@@ -40,7 +43,7 @@ const Login: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Realizar Login</title>
+        <title>Casdastre-se</title>
         <meta name="description" content="Link my world" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -50,8 +53,14 @@ const Login: NextPage = () => {
           <div className={styles.user_icon}>
             <Icon size={90} />
           </div>
-          <div className={styles.label_page}>Fazer login</div>
+          <div className={styles.label_page}>Casdastre-se</div>
           <Form className={styles.form} ref={formRef} onSubmit={handleSubmit}>
+            <Input
+              name="name"
+              type="text"
+              placeholder="Nome"
+              autoComplete="off"
+            />
             <Input
               name="email"
               type="email"
@@ -59,6 +68,11 @@ const Login: NextPage = () => {
               autoComplete="off"
             />
             <Input name="senha" type="password" placeholder="Senha" />
+            <Input
+              name="rsenha"
+              type="password"
+              placeholder="Confirme a Senha"
+            />
             <Submit>Realizar Login</Submit>
           </Form>
         </main>
@@ -67,4 +81,4 @@ const Login: NextPage = () => {
   );
 };
 
-export default Login;
+export default Register;
