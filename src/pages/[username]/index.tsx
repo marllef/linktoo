@@ -40,16 +40,8 @@ const UserLinks = () => {
           ]}
         />
         <div className={styles.social}>
-          <Facebook
-            onClick={async () =>
-              await createUser("marllef@hotmail.com", "22051998")
-            }
-            className={styles.icon}
-          />
-          <Instagram
-            onClick={async () => await signOut()}
-            className={styles.icon}
-          />
+          <Facebook className={styles.icon} />
+          <Instagram className={styles.icon} />
           <Twitter className={styles.icon} />
         </div>
       </main>

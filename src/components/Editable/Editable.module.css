@@ -1,0 +1,11 @@
+.link_title {
+  @apply flex font-bold text-lg items-center leading-none break-all text-ellipsis;
+}
+
+.title_editable_preview {
+  @apply font-bold text-lg leading-none break-all text-ellipsis;
+}
+
+.link_href {
+  @apply flex w-[8rem] xs:w-[9rem] italic truncate;
+}

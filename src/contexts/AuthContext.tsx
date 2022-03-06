@@ -1,11 +1,12 @@
 import { User } from "firebase/auth";
-import { useRouter } from "next/router";
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { FirebaseAuth } from "~/utils/Firebase";
+import { AuthServices } from "~/services/AuthServices";
 
 interface AuthContextTypes {
-  currentUser: User | null;
+  user: User | null;
+  loading: boolean;
   signIn: { (email: string, password: string): Promise<User> };
+  signInWithGoogle: { (): Promise<User> };
   createUser: {
     (name: string, email: string, password: string): Promise<User>;
   };
@@ -20,37 +21,47 @@ export const AuthContext = createContext<AuthContextTypes | null>(null);
 
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
-  const auth = new FirebaseAuth();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (auth.currentUser) {
-      console.log("User: ", auth.currentUser);
-      setUser(auth.currentUser);
-    }
-  }, [auth.currentUser]);
+    AuthServices.onAuthChange((user) => {
+      setUser(user);
+      setLoading(false);
+    });
+  }, []);
 
   async function signIn(email: string, password: string) {
-    const currentUser = await auth.signIn(email, password);
-    setUser(auth.currentUser);
+    const currentUser = await AuthServices.login(email, password);
+    setUser(currentUser);
+    return currentUser;
+  }
+
+  async function signInWithGoogle() {
+    const currentUser = await AuthServices.loginWithGoogle();
+    setUser(currentUser);
     return currentUser;
   }
 
   async function createUser(name: string, email: string, password: string) {
-    const currentUser = await auth.createUser(name, email, password);
-    setUser(auth.currentUser);
+    const currentUser = await AuthServices.createUser(name, email, password);
+    setUser(currentUser);
     return currentUser;
   }
 
   async function signOut() {
-    await auth.signOut();
-    setUser(auth.currentUser);
+    await AuthServices.signOut();
+    setLoading(false);
+    setUser(null);
   }
 
-  return (
-    <AuthContext.Provider
-      value={{ currentUser: user, signIn, signOut, createUser }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  const value = {
+    user,
+    loading,
+    signIn,
+    signInWithGoogle,
+    signOut,
+    createUser,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

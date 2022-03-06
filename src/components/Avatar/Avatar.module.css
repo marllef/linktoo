@@ -1,12 +1,3 @@
-.container {
-  @apply flex w-40 h-40 rounded-full overflow-hidden;
-  @apply justify-center items-center select-none;
-}
-
-.image {
-  @apply w-full h-full object-cover;
-}
-
-.falback {
-  @apply flex w-full h-full items-center justify-center text-7xl bg-slate-200 text-white;
+.avatar {
+  @apply select-none cursor-pointer;
 }

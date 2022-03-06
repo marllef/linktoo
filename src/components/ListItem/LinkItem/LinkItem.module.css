@@ -1,0 +1,20 @@
+.list_item {
+  @apply flex flex-col box-border min-w-[18rem] justify-between items-center overflow-hidden;
+  @apply bg-white border mb-1 last:mb-0 rounded-lg;
+}
+
+.content {
+  @apply flex w-full justify-between items-center max-w-full;
+}
+
+.indicator {
+  @apply flex w-2;
+}
+
+.link_title {
+  @apply flex font-bold text-lg items-center leading-none break-all text-ellipsis py-1;
+}
+
+.link_href {
+  @apply flex w-[8rem] xs:w-[9rem] italic truncate;
+}

@@ -1,0 +1,9 @@
+.trigger {
+  @apply hidden sm:flex p-1 justify-start items-center;
+  @apply bg-slate-100 cursor-pointer select-none rounded-full;
+  @apply focus:outline-none focus:ring focus:ring-blue-200;
+}
+
+.trigger_user_name {
+  @apply ml-2 mr-1 text-sm;
+}

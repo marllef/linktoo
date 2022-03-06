@@ -1,0 +1,8 @@
+.button {
+  @apply p-1 rounded-full focus:ring focus:outline-none border-0 cursor-pointer;
+  @apply text-slate-800 hover:text-sky-600 focus:ring-blue-200;
+}
+
+.button[color="red"] {
+  @apply hover:text-red-500;
+}

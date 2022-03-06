@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { AiOutlineUser as Icon } from "react-icons/ai";
 import { Input } from "~/components/Input";
@@ -9,9 +9,10 @@ import { SubmitButton as Submit } from "~/components/Button/Submit";
 import { useAuth } from "~/hooks/useAuth";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import nookies from "nookies";
 
 const Login: NextPage = () => {
-  const { signIn, currentUser } = useAuth();
+  const { signIn, user, signInWithGoogle } = useAuth();
   const router = useRouter();
   const formRef = useRef(null);
 
@@ -25,7 +26,8 @@ const Login: NextPage = () => {
 
   async function handleSubmit(data: any) {
     try {
-      const user = await signIn(data.email, data.senha);
+      // const user = await signIn(data.email, data.senha);
+      await signInWithGoogle();
       router.replace("/");
     } catch (err: any) {
       if (!toast.isActive(err.message)) {
@@ -52,19 +54,28 @@ const Login: NextPage = () => {
           </div>
           <div className={styles.label_page}>Fazer login</div>
           <Form className={styles.form} ref={formRef} onSubmit={handleSubmit}>
-            <Input
-              name="email"
-              type="email"
-              placeholder="Email"
-              autoComplete="off"
-            />
-            <Input name="senha" type="password" placeholder="Senha" />
-            <Submit>Realizar Login</Submit>
+            <Submit>Login com o Google</Submit>
           </Form>
         </main>
       </div>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = nookies.get(context);
+  if (cookies["USER_AUTHENTICATED"]) {
+    return {
+      props: {},
+      redirect: {
+        destination: "/",
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 };
 
 export default Login;
