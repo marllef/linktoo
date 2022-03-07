@@ -29,10 +29,10 @@ export const Input = ({ label, name, ...rest }: Props) => {
 
   return (
     <>
-      <label htmlFor={name} className="sr-only">
+      <label htmlFor={name} className={styles.label}>
         {label}
       </label>
-      <input id={name} ref={inputRef} className={styles.input} {...rest} />
+      <input className={styles.input} id={name} ref={inputRef} {...rest} />
     </>
   );
 };

@@ -8,6 +8,7 @@ import nookies from "nookies";
 import styles from "../styles/Home.module.css";
 import { Box, Flex, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import { LinkPanel } from "~/components/Panel/LinkPanel";
+import { useLinks } from "~/hooks/fetcher";
 
 const Home: NextPage = () => {
   const { user, loading } = useAuth();
@@ -22,7 +23,9 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Link-me | {user?.displayName?.split(" ")[0] || "Buscando..."}</title>
+        <title>
+          Link-me | {user?.displayName?.split(" ")[0] || "Buscando..."}
+        </title>
         <meta name="description" content="Link my world" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

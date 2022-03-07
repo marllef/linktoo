@@ -7,29 +7,32 @@ import {
   Stack,
   Switch,
   useEditableControls,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import {
-  FaTrash as Exclude,
-  FaCog as Settings,
-  FaPen as Edit,
-  FaRegStar as OutlineStar,
-  FaStar as Star,
-} from "react-icons/fa";
+
+import { EditAction } from "~/components/Actions/Edit";
+import { ExcludeAction } from "~/components/Actions/Exclude";
 import { Editable } from "~/components/Editable";
 import { IconButton } from "~/components/IconButton";
+import { deleteLink, updateLink } from "~/hooks/fetcher";
 import styles from "./LinkItem.module.css";
 
 interface Props {
-  item: { title: string; href: string; active: boolean };
+  item: { id: string; title: string; href: string; active: boolean };
 }
 
 export const LinkItem = ({ item }: Props) => {
   const [checked, setChecked] = useState(item.active);
-  const [isEditable, setIsEditable] = useState(true);
-  const [title, setTitle] = useState(item.title);
-  const [href, setHref] = useState(item.href);
+  const successToast = useToast({
+    id: "success-update-link",
+    title: "Link publicado com sucesso!",
+    variant: "solid",
+    position: "bottom",
+    duration: 2000,
+    status: "success",
+  });
 
   return (
     <ListItem className={styles.list_item} onMouseOver={() => {}}>
@@ -48,22 +51,25 @@ export const LinkItem = ({ item }: Props) => {
         <Flex>
           <HStack className="flex flex-1 mr-2">
             <HStack className="flex rounded-full text-slate-700 bg-slate-100 p-1">
-              <IconButton
-                aria-label="Exclude action"
-                color="red"
-                icon={<Exclude />}
-              />
-              <IconButton
-                aria-label="Edit action"
-                icon={<Edit />}
-                onClick={() => setIsEditable((value) => !value)}
-              />
+              <ExcludeAction item={item} />
+              <EditAction item={item} />
             </HStack>
 
             <Switch
               checked={checked}
               defaultChecked={item.active}
-              onChange={(status) => setChecked(status.currentTarget.checked)}
+              onChange={(status) => {
+                updateLink(item.id, { active: status.currentTarget.checked })
+                  .then((value) => {
+                    successToast({
+                      description: `O link ${value.title} ${
+                        !checked ? "agora está" : "não está mais"
+                      } publico!`,
+                    });
+                    setChecked(value.active);
+                  })
+                  .catch((err) => console.log(err.message));
+              }}
               colorScheme="green"
             />
           </HStack>
