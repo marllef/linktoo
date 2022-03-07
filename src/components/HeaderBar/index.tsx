@@ -1,5 +1,4 @@
 import styles from "./HeaderBar.module.css";
-import { MdArrowDropDown as Icon } from "react-icons/MD";
 import { Tab, TabList } from "@chakra-ui/react";
 import { UserPopover } from "../UserPopover";
 import { useAuth } from "~/hooks/useAuth";
