@@ -11,7 +11,7 @@ import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 const Register: NextPage = () => {
-  const { createUser, currentUser } = useAuth();
+  const { createUser } = useAuth();
   const formRef = useRef(null);
   const router = useRouter();
   const toast = useToast({
