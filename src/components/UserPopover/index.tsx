@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 import { Item } from "./Item";
-import { MdArrowDropDown as Icon } from "react-icons/MD";
+import { MdArrowDropDown as Icon } from "react-icons/md";
 import styles from "./UserPopover.module.css";
 
 export const UserPopover = () => {
