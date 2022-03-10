@@ -7,11 +7,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id } = req.query;
-
   try {
+    const { id } = req.query;
     await prisma.$connect();
-    const { email, href, title, active } = JSON.parse(req.body);
 
     switch (req.method) {
       case "GET":
@@ -23,29 +21,17 @@ export default async function handler(
 
         res.status(200).json(link);
         break;
-      case "POST":
-        const created = await prisma.link.create({
-          data: {
-            href,
-            title,
-            User: {
-              connect: {
-                email: `${email}`,
-              },
-            },
-          },
-        });
 
-        res.status(201).json(created);
-
-        break;
       // Change link active prop
       case "PUT":
+        const { active, href, title } = JSON.parse(req.body);
         const updated = await prisma.link.update({
           where: {
             id: `${id}`,
           },
           data: {
+            href,
+            title,
             active,
           },
         });
@@ -53,11 +39,13 @@ export default async function handler(
         res.status(201).json(updated);
         break;
       case "DELETE":
-        await prisma.link.delete({
+        const deleted = await prisma.link.delete({
           where: {
             id: `${id}`,
           },
         });
+
+        res.status(200).json(deleted);
         break;
       default:
         res.status(200);

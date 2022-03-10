@@ -7,18 +7,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const { username } = req.query;
   try {
     await prisma.$connect();
+
     switch (req.method) {
-      case "GET":
-        const users = await prisma.user.findMany({});
-        res.status(200).json(users);
-        break;
-      case "POST":
-        const { username } = JSON.parse(req.body);
+      case "GET": // getLinksByUsername
         const { links } = await prisma.user.findUnique({
           where: {
-            username: username,
+            username: `${username}`,
           },
           select: {
             links: {
@@ -36,7 +33,7 @@ export default async function handler(
         break;
 
       default:
-        res.status(200);
+        res.status(404);
     }
   } catch (err: any) {
     console.log(err.message);

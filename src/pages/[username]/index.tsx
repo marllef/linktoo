@@ -8,14 +8,15 @@ import {
 import { Avatar } from "~/components/Avatar";
 import Head from "next/head";
 import { LinkArea } from "~/components/LinkArea";
-import { useAuth } from "~/hooks/useAuth";
-import { useEffect } from "react";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { PrismaClient } from "@prisma/client";
 
-const UserLinks = () => {
-  const router = useRouter();
-  const { username } = router.query;
-  const { signIn, signOut, createUser } = useAuth();
+const prisma = new PrismaClient();
 
+const UserLinks = ({
+  links,
+  username,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -23,22 +24,9 @@ const UserLinks = () => {
       </Head>
       <header className={styles.header} />
       <main className={styles.main}>
-        <Avatar src="https://github.com/marllefH.png" />
+        <Avatar size="2xl" name={`${username}`} />
         <div className={styles.username}>@{username}</div>
-        <LinkArea
-          links={[
-            {
-              href: "#",
-              title: "Facebook",
-              color: "face",
-            },
-            {
-              href: "#",
-              title: "Instagram",
-              color: "insta",
-            },
-          ]}
-        />
+        <LinkArea links={links} />
         <div className={styles.social}>
           <Facebook className={styles.icon} />
           <Instagram className={styles.icon} />
@@ -48,6 +36,40 @@ const UserLinks = () => {
       <footer className={styles.footer}> Developed by marllef </footer>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { username } = context.query;
+
+  try {
+    const { links } = await prisma.user.findUnique({
+      where: {
+        username: `${username}`,
+      },
+      select: {
+        links: {
+          where: {
+            active: {
+              equals: true,
+            },
+          },
+        },
+      },
+      rejectOnNotFound: true,
+    });
+
+    return {
+      props: {
+        links,
+        username,
+      },
+    };
+  } catch (err: any) {
+    console.log(err.message);
+    return {
+      notFound: true,
+    };
+  }
 };
 
 export default UserLinks;

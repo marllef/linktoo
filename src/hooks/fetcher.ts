@@ -56,3 +56,12 @@ export const updateLink = async (id: string, changes: any) => {
   const data: Link = await response.json();
   return data;
 };
+
+export const getLinksByUsername = async (username: string) => {
+  await fetch("/api/database/users", {
+    method: "POST",
+    body: JSON.stringify({
+      username,
+    }),
+  });
+};

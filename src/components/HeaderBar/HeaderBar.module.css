@@ -1,4 +1,4 @@
 .header_bar {
-  @apply flex bg-white w-full min-w-[20rem] h-14 py-2 px-20 shadow fixed;
+  @apply flex bg-white w-full min-w-[20rem] h-14 sm:h-12 py-2 px-16 shadow fixed;
   @apply justify-center items-center sm:justify-between;
 }

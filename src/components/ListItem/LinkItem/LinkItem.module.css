@@ -1,6 +1,6 @@
 .list_item {
   @apply flex flex-col box-border min-w-[18rem] justify-between items-center overflow-hidden;
-  @apply bg-white border mb-1 last:mb-0 rounded-lg;
+  @apply bg-white border mb-1 last:mb-0 rounded-md;
 }
 
 .content {
@@ -12,9 +12,9 @@
 }
 
 .link_title {
-  @apply flex font-bold text-lg items-center leading-none break-all text-ellipsis py-1;
+  @apply flex font-bold text-base items-center leading-none break-all text-ellipsis;
 }
 
 .link_href {
-  @apply flex w-[8rem] xs:w-[9rem] italic truncate;
+  @apply flex w-[8rem] xs:w-[9rem] italic truncate text-xs;
 }

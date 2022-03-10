@@ -4,16 +4,16 @@ import { UserPopover } from "../UserPopover";
 import { useAuth } from "~/hooks/useAuth";
 
 export const HeaderBar = () => {
-  const { user } = useAuth();
+  const selected = { bg: "slate.100", color: "green.500" };
+  const focus = { ring: 2 };
+
   return (
     <div className={styles.header_bar}>
       <div className="hidden sm:flex">LinkMe</div>
-      <div>
+      <div className="flex justify-center items-center">
         <TabList>
-          <Tab _selected={{ bg: "slate.100", color: "green.500" }}>Links</Tab>
-          <Tab _selected={{ bg: "slate.100", color: "green.500" }}>
-            Configurações
-          </Tab>
+          <Tab>Links</Tab>
+          <Tab>Configurações</Tab>
         </TabList>
       </div>
 

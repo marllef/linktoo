@@ -3,10 +3,10 @@ import styles from "./Avatar.module.css";
 
 interface Props extends AvatarProps {}
 
-export const Avatar = ({ size = "sm", ...rest }: Props) => {
+export const Avatar = ({ size = "xs", ...rest }: Props) => {
   return (
-    <div className={styles.avatar}>
-      <CAvatar size={size} {...rest} />
-    </div>
+    <CAvatar size={size} {...rest} userSelect="none">
+      <AvatarBadge />
+    </CAvatar>
   );
 };

@@ -6,6 +6,7 @@ import {
   ListItem,
   Stack,
   Switch,
+  useBoolean,
   useEditableControls,
   useToast,
   VStack,
@@ -25,9 +26,10 @@ interface Props {
 
 export const LinkItem = ({ item }: Props) => {
   const [checked, setChecked] = useState(item.active);
+  const [hovered, setHovered] = useBoolean();
   const successToast = useToast({
     id: "success-update-link",
-    title: "Link publicado com sucesso!",
+    title: "Link alterado com sucesso!",
     variant: "solid",
     position: "bottom",
     duration: 2000,
@@ -35,7 +37,7 @@ export const LinkItem = ({ item }: Props) => {
   });
 
   return (
-    <ListItem className={styles.list_item} onMouseOver={() => {}}>
+    <ListItem className={styles.list_item} onMouseLeave={setHovered.off} onMouseEnter={setHovered.on}>
       <div className={styles.content}>
         <Flex className="box-border">
           <div
@@ -50,14 +52,17 @@ export const LinkItem = ({ item }: Props) => {
         </Flex>
         <Flex>
           <HStack className="flex flex-1 mr-2">
-            <HStack className="flex rounded-full text-slate-700 bg-slate-100 p-1">
-              <ExcludeAction item={item} />
-              <EditAction item={item} />
-            </HStack>
+            <div className={`${hovered ? "flex" : "hidden"}`}>
+              <HStack className=" rounded-full text-slate-700 bg-slate-100 p-[2px]">
+                <ExcludeAction item={item} />
+                <EditAction item={item} />
+              </HStack>
+            </div>
 
             <Switch
               checked={checked}
               defaultChecked={item.active}
+              size="sm"
               onChange={(status) => {
                 updateLink(item.id, { active: status.currentTarget.checked })
                   .then((value) => {

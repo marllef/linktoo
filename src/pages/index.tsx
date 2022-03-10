@@ -6,12 +6,19 @@ import { useAuth } from "~/hooks/useAuth";
 import { HeaderBar } from "../components/HeaderBar";
 import nookies from "nookies";
 import styles from "../styles/Home.module.css";
-import { Box, Flex, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  TabPanel,
+  TabPanels,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { LinkPanel } from "~/components/Panel/LinkPanel";
-import { useLinks } from "~/hooks/fetcher";
+import { Tabs } from "~/components/Tabs";
 
 const Home: NextPage = () => {
   const { user, loading } = useAuth();
+  const size = useBreakpointValue({ sm: "md", md: "sm", lg: "sm" });
   const router = useRouter();
 
   useEffect(() => {
@@ -31,9 +38,10 @@ const Home: NextPage = () => {
       </Head>
 
       <Tabs
+        size={size}
         className="flex h-screen overflow-hidden bg-slate-100 min-w-[20rem]"
-        variant="soft-rounded"
-        colorScheme="blue"
+        variant="simple-rounded"
+        colorScheme="slate"
       >
         <HeaderBar />
 

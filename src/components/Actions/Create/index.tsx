@@ -53,6 +53,7 @@ export const CreateAction = () => {
         });
         successToast({
           title: "Sucesso ao adicionar link!",
+          position: "bottom",
           description: `O link ${link.title} foi adicionado à sua lista.`,
         });
         reset();
