@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Button from "../Button";
+import { Link as ButtonLink } from "~/components/Button/Link";
 
 interface Props {
   links: {
@@ -21,12 +21,12 @@ interface Props {
 
 export const LinkArea = ({ links }: Props) => {
   return (
-    <div className="flex flex-col justify-start w-full h-full min-w-max px-8 lg:px-96 xl:px-[35rem]">
+    <div className="flex flex-col justify-start  w-full h-full min-w-max px-8 lg:px-96 xl:px-[35rem]">
       {(links || []).map(
         (item, index) =>
           index <= 4 && (
-            <Link key={item.href + index} href={item.href} passHref>
-              <Button.Link colorScheme={item.color}>{item.title}</Button.Link>
+            <Link key={item.href + index} href={`http://${item.href}`} passHref>
+              <ButtonLink color={'white'} variant="glass">{item.title}</ButtonLink>
             </Link>
           )
       )}

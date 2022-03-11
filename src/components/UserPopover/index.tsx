@@ -47,16 +47,16 @@ export const UserPopover = () => {
         >
           <PopoverArrow />
           <PopoverHeader>
-            <Center className="font-bold">
+            <Center className="font-bold text-sm">
               Logado como {user?.displayName!.split(" ")[0]}
             </Center>
           </PopoverHeader>
 
           <PopoverBody>
-            <Item>Item 1</Item>
-            <Item>Item 2</Item>
-            <Item>Item 3</Item>
-            <Item>Item 4</Item>
+            <Item>Perfil</Item>
+            <Item>Links</Item>
+            <Item>Preferências</Item>
+            <Item>Estatísticas</Item>
           </PopoverBody>
           <PopoverFooter>
             <Item onClick={signOut}>Sair</Item>

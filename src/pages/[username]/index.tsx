@@ -10,6 +10,7 @@ import Head from "next/head";
 import { LinkArea } from "~/components/LinkArea";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { PrismaClient } from "@prisma/client";
+import { Box, Text } from "@chakra-ui/react";
 
 const prisma = new PrismaClient();
 
@@ -18,20 +19,20 @@ const UserLinks = ({
   username,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${styles.gradient} `}>
       <Head>
         <title> Links | @{username}</title>
       </Head>
       <header className={styles.header} />
       <main className={styles.main}>
         <Avatar size="2xl" name={`${username}`} />
-        <div className={styles.username}>@{username}</div>
+        <Text className={`${styles.username}`}>@{username}</Text>
         <LinkArea links={links} />
-        <div className={styles.social}>
+        <Box className={styles.social}>
           <Facebook className={styles.icon} />
           <Instagram className={styles.icon} />
           <Twitter className={styles.icon} />
-        </div>
+        </Box>
       </main>
       <footer className={styles.footer}> Developed by marllef </footer>
     </div>

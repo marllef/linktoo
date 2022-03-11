@@ -7,7 +7,7 @@ interface Props extends ButtonHTMLAttributes<HTMLDivElement> {
 export const Item = ({ children, ...rest }: Props) => {
   return (
     <div
-      className="select-none rounded cursor-pointer p-2 hover:bg-gray-100"
+      className="select-none rounded cursor-pointer p-1 hover:bg-gray-100"
       {...rest}
     >
       {children}
