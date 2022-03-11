@@ -1,4 +1,5 @@
-import firebase, { initializeApp } from "firebase/app";
+import * as firebase from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 const config = {

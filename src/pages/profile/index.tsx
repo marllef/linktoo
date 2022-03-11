@@ -3,18 +3,11 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useAuth } from "~/hooks/useAuth";
-import { HeaderBar } from "~/components/HeaderBar";
 import nookies from "nookies";
 
 import {
-  Box,
-  Flex,
-  TabPanel,
-  TabPanels,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { LinkPanel } from "~/components/Panel/LinkPanel";
-import { Tabs } from "~/components/Tabs";
 
 const Profile: NextPage = () => {
   const { user, loading } = useAuth();
@@ -36,6 +29,8 @@ const Profile: NextPage = () => {
         <meta name="description" content="Link my world" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      
     </>
   );
 };
