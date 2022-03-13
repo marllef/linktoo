@@ -1,16 +1,17 @@
 import { Flex, List, ListItem, Stack, Switch } from "@chakra-ui/react";
+import { Link } from "@prisma/client";
 import { LinkItem } from "~/components/ListItem/LinkItem";
 import styles from "./ListLink.module.css";
 
 interface Props {
-  data: any[];
+  data: Link[];
 }
 
 export const ListLink = ({ data = [] }: Props) => {
   return (
     <List className="w-full py-2">
       {data.map((item, index) => {
-        return <LinkItem key={index} item={item} />;
+        return <LinkItem key={item.id} item={item} />;
       })}
     </List>
   );

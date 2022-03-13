@@ -46,6 +46,7 @@ export const ExcludeAction = ({ item }: Props) => {
           description: err.message,
         })
       );
+    onClose();
   }
 
   return (
