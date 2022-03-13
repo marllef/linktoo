@@ -56,7 +56,7 @@ export const UserPopover = () => {
 
           <PopoverBody>
             <Item onClick={() => router.push("/")}>Início</Item>
-            <Item onClick={() => router.push(`${data?.username!}`)}>
+            <Item onClick={() => router.push(`/${data?.username!}`)}>
               Perfil
             </Item>
             <Item onClick={() => router.push("/settings")}>Configurações</Item>
