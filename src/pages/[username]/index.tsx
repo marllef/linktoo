@@ -77,6 +77,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 equals: true,
               },
             },
+            orderBy: {
+              index: "asc",
+            },
           },
         },
         rejectOnNotFound: true,

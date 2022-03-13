@@ -1,7 +1,6 @@
-import { Flex, List, ListItem, Stack, Switch } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import { Link } from "@prisma/client";
 import { LinkItem } from "~/components/ListItem/LinkItem";
-import styles from "./ListLink.module.css";
 
 interface Props {
   data: Link[];

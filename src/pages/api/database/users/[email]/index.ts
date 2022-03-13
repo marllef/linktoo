@@ -19,7 +19,11 @@ export default async function handler(
             email: `${email}`,
           },
           select: {
-            links: true,
+            links: {
+              orderBy: {
+                index: "asc",
+              },
+            },
           },
         });
 

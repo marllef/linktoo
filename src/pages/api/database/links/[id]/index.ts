@@ -24,7 +24,7 @@ export default async function handler(
 
       // Change link active prop
       case "PUT":
-        const { active, href, title } = JSON.parse(req.body);
+        const { active, href, title, index } = JSON.parse(req.body);
         const updated = await prisma.link.update({
           where: {
             id: `${id}`,
@@ -33,6 +33,7 @@ export default async function handler(
             href,
             title,
             active,
+            index,
           },
         });
 

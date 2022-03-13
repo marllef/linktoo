@@ -9,6 +9,8 @@ import {
   Button,
   HStack,
   useToast,
+  Flex,
+  VStack,
 } from "@chakra-ui/react";
 import { FormHandles, FormHelpers } from "@unform/core";
 import { Form } from "@unform/web";
@@ -53,7 +55,7 @@ export const EditAction = ({ item }: Props) => {
           ...vData,
         });
         successToast({
-          title: "Link atualizado com sucesso!",
+          title: "Link alterado com sucesso!",
           position: "bottom",
         });
         reset();
@@ -71,7 +73,7 @@ export const EditAction = ({ item }: Props) => {
           if (!errorToast.isActive(error.message)) {
             errorToast({
               id: error.message,
-              title: "Erro ao adicionar link.",
+              title: "Erro ao modificar link.",
               position: "bottom",
               description: error.message,
             });
@@ -95,23 +97,31 @@ export const EditAction = ({ item }: Props) => {
         <ModalContent>
           <ModalHeader>Editar</ModalHeader>
           <ModalBody>
-            <Form ref={formRef} onSubmit={handleSubmit}>
-              <Input
-                name="title"
-                label="Titulo"
-                color="ligth"
-                type="text"
-                placeholder="Titulo"
-                defaultValue={item.title}
-              />
-              <Input
-                name="href"
-                label="Link"
-                color="ligth"
-                type={"url"}
-                placeholder="Link"
-                defaultValue={item.href}
-              />
+            <Form ref={formRef} onSubmit={handleSubmit} initialData={item}>
+              <VStack>
+                <Input
+                  name="index"
+                  label="Ordem"
+                  color="ligth"
+                  type={"number"}
+                  placeholder="Ordem"
+                />
+
+                <Input
+                  name="title"
+                  label="Titulo"
+                  type="text"
+                  placeholder="Titulo"
+                />
+
+                <Input
+                  name="href"
+                  label="Link"
+                  type={"url"}
+                  placeholder="Link"
+                  defaultValue={item.href}
+                />
+              </VStack>
             </Form>
           </ModalBody>
 

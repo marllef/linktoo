@@ -84,11 +84,27 @@ const Settings: NextPage = () => {
   }
 
   async function handleSubmit(data: any) {
-    const { username, ...rest } = data;
+    const {
+      username,
+      facebook: fb,
+      instagram: ig,
+      twitter: tt,
+      ...rest
+    } = data;
+    const facebook = fb.replace("https://", "").replace("http://", "");
+    const instagram = ig.replace("https://", "").replace("http://", "");
+    const twitter = tt.replace("https://", "").replace("http://", "");
+
+    const social = {
+      facebook,
+      instagram,
+      twitter,
+    };
+
     try {
       const find = users.filter((listUser) => listUser.username === username);
       if (find.length) {
-        await updateUserData(user!, { ...rest });
+        await updateUserData(user!, { ...social, ...rest });
         toast({
           id: "success-on-save-data",
           title: "Alterações salvas com sucesso!",
@@ -96,13 +112,14 @@ const Settings: NextPage = () => {
           status: "warning",
         });
       } else {
-        await updateUserData(user!, { ...data });
+        await updateUserData(user!, { ...data, ...social });
         toast({
           id: "success-on-save-data",
           title: "Alterações salvas com sucesso!",
           status: "success",
         });
       }
+      setTimeout(router.reload, 3000);
     } catch (err: any) {
       toast({
         id: "error-on-save-data",
