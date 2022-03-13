@@ -121,9 +121,9 @@ const variantFilled: PartsStyleFunction<typeof parts> = (props) => {
     field: {
       border: "1px solid",
       borderColor: "gray.200",
-      bg: mode("white", "whiteAlpha.50")(props),
+      bg: mode("slate.50", "whiteAlpha.50")(props),
       _hover: {
-        bg: mode("whiteAlpha.800", "whiteAlpha.100")(props),
+        bg: mode("slate.100", "whiteAlpha.100")(props),
         borderColor: 'gray.300'
       },
       _readOnly: {

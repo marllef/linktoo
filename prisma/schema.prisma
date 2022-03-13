@@ -12,13 +12,16 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  uid      String  @unique
-  name     String
-  username String? @unique @default(uuid())
-  photoUrl String?
-  email    String  @unique
-  links    Link[]
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  uid       String  @unique
+  name      String
+  username  String? @unique @default(uuid())
+  photoUrl  String?
+  facebook  String?
+  twitter   String?
+  instagram String?
+  email     String  @unique
+  links     Link[]
 }
 
 model Link {

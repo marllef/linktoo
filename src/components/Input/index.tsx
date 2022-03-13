@@ -4,6 +4,7 @@ import {
   Input as CKInput,
   InputAddon,
   InputGroup,
+  InputLeftAddon,
   InputProps,
   InputRightAddon,
   InputRightElement,
@@ -11,12 +12,14 @@ import {
 } from "@chakra-ui/react";
 import { useField } from "@unform/core";
 import styles from "./Input.module.css";
+import { FaFacebook } from "react-icons/fa";
 
 interface Props extends InputProps {
   label?: string;
   name: string;
   isLoading?: boolean;
   rightElement?: ReactNode;
+  leftElement?: ReactNode;
 }
 
 export const Input = ({
@@ -24,6 +27,7 @@ export const Input = ({
   color,
   className,
   rightElement,
+  leftElement,
   isLoading,
   variant = "filled",
   name,
@@ -54,11 +58,16 @@ export const Input = ({
         {label}
       </label>
       <InputGroup>
+        {typeof leftElement !== "undefined" && (
+          <InputLeftAddon>{leftElement}</InputLeftAddon>
+        )}
+
         <CKInput
           id={name}
           variant={variant}
           autoComplete="off"
           ref={inputRef}
+          defaultValue={defaultValue}
           {...rest}
         />
 

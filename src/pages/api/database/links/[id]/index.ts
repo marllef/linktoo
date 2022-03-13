@@ -52,5 +52,7 @@ export default async function handler(
     }
   } catch (err: any) {
     console.log(err.message);
+  } finally {
+    await prisma.$disconnect();
   }
 }

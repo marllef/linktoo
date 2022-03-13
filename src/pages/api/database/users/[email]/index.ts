@@ -27,18 +27,20 @@ export default async function handler(
         break;
 
       case "PUT":
-        const { photoUrl, username } = JSON.parse(req.body);
+        const {
+          email: userEmail,
+          uid: userUid,
+          ...rest
+        } = JSON.parse(req.body);
         const updated = await prisma.user.update({
           where: {
             email: `${email}`,
           },
           data: {
-            photoUrl,
-            
-            username,
+            ...rest,
           },
         });
-
+        console.log("Updated", updated);
         res.status(201).json(updated);
         break;
 
@@ -47,5 +49,7 @@ export default async function handler(
     }
   } catch (err: any) {
     console.log(err.message);
+  } finally {
+    await prisma.$disconnect();
   }
 }

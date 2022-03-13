@@ -33,7 +33,7 @@ export const useUsers = () => {
       return users;
     },
     {
-      refreshInterval: 5000,
+      refreshInterval: 10000,
     }
   );
 

@@ -7,6 +7,7 @@ import {
   Heading,
   HStack,
   StackDivider,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { Form } from "@unform/web";
@@ -31,6 +32,14 @@ import { useUsers } from "~/hooks/fetcher";
 import { CheckIcon } from "~/components/CheckIcon";
 import { FormHandles } from "@unform/core";
 import { AuthServices } from "~/services/AuthServices";
+import {
+  FaAt,
+  FaCamera,
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaUserAlt,
+} from "react-icons/fa";
 
 const Settings: NextPage = () => {
   const { user, data, updateUserData, loading } = useAuth();
@@ -40,7 +49,14 @@ const Settings: NextPage = () => {
 
   const [photoURL, setPhotoURL] = useState(data?.photoUrl!);
   const [isValid, setIsValid] = useState(false);
+  const [showStatus, setShowStatus] = useState(false);
   const [photoLoading, setPhotoLoading] = useState(false);
+
+  const toast = useToast({
+    position: "bottom",
+    duration: 5000,
+    variant: "solid",
+  });
 
   useEffect(() => {
     if (!user && !loading) {
@@ -58,17 +74,42 @@ const Settings: NextPage = () => {
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const value = event.currentTarget.value;
     const find = users.filter((listUser) => listUser.username === value);
+    setShowStatus(true);
 
     if (find.length) {
-      setIsValid(false);
-    } else {
       setIsValid(true);
+    } else {
+      setIsValid(false);
     }
   }
 
-  function handleSubmit(data: any) {
-    if (isValid) {
-      updateUserData(user!, { ...data });
+  async function handleSubmit(data: any) {
+    const { username, ...rest } = data;
+    try {
+      const find = users.filter((listUser) => listUser.username === username);
+      if (find.length) {
+        await updateUserData(user!, { ...rest });
+        toast({
+          id: "success-on-save-data",
+          title: "Alterações salvas com sucesso!",
+          description: "O nome de usuario não foi alterado.",
+          status: "warning",
+        });
+      } else {
+        await updateUserData(user!, { ...data });
+        toast({
+          id: "success-on-save-data",
+          title: "Alterações salvas com sucesso!",
+          status: "success",
+        });
+      }
+    } catch (err: any) {
+      toast({
+        id: "error-on-save-data",
+        title: "Erro ao salvar alterações.",
+        description: err.message,
+        status: "error",
+      });
     }
   }
 
@@ -84,8 +125,8 @@ const Settings: NextPage = () => {
 
       <HeaderBar />
 
-      <Main p={2}>
-        <Form onSubmit={handleSubmit} ref={formRef}>
+      <Main p={2} bg="white">
+        <Form onSubmit={handleSubmit} ref={formRef} initialData={data}>
           <Center>
             <VStack
               w="full"
@@ -104,17 +145,19 @@ const Settings: NextPage = () => {
                     name="username"
                     label="Usuário"
                     isLoading={loading}
-                    rightElement={<CheckIcon status={isValid} />}
+                    leftElement={<FaAt />}
+                    rightElement={
+                      <CheckIcon status={!isValid} showStatus={showStatus} />
+                    }
                     onChange={onChange}
-                    defaultValue={data?.username!}
                   />
 
                   <Input
-                    isLoading={photoLoading}
+                    isLoading={photoLoading || loading}
                     name="photoUrl"
                     label="URL da Foto"
                     type="url"
-                    defaultValue={data?.photoUrl!}
+                    leftElement={<FaCamera />}
                     onBlur={() => setPhotoLoading(false)}
                     onChange={(e) => {
                       setPhotoLoading(true);
@@ -124,6 +167,29 @@ const Settings: NextPage = () => {
                   />
                 </VStack>
               </HStack>
+              <VStack w={"full"}>
+                <Input
+                  isLoading={loading}
+                  name="facebook"
+                  label="Facebook"
+                  leftElement={<FaFacebookF />}
+                  type="url"
+                />
+                <Input
+                  isLoading={loading}
+                  name="instagram"
+                  label="Instagram"
+                  leftElement={<FaInstagram />}
+                  type="url"
+                />
+                <Input
+                  isLoading={loading}
+                  name="twitter"
+                  label="Twitter"
+                  leftElement={<FaTwitter />}
+                  type="url"
+                />
+              </VStack>
 
               <HStack>
                 <Button

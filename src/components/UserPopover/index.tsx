@@ -26,7 +26,7 @@ import { useRouter } from "next/router";
 
 export const UserPopover = () => {
   const router = useRouter();
-  const { user, signOut, loading } = useAuth();
+  const { user, data, signOut, loading } = useAuth();
   return (
     <Popover placement="bottom-end">
       <PopoverTrigger>
@@ -55,12 +55,11 @@ export const UserPopover = () => {
           </PopoverHeader>
 
           <PopoverBody>
-            <Item>Perfil</Item>
-            <Item>Links</Item>
-            <Item onClick={() => router.push("/preferences")}>
-              Preferências
+            <Item onClick={() => router.push("/")}>Início</Item>
+            <Item onClick={() => router.push(`${data?.username!}`)}>
+              Perfil
             </Item>
-            <Item>Estatísticas</Item>
+            <Item onClick={() => router.push("/settings")}>Configurações</Item>
           </PopoverBody>
           <PopoverFooter>
             <Item onClick={signOut}>Sair</Item>
