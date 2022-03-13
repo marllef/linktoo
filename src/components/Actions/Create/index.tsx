@@ -105,14 +105,14 @@ export const CreateAction = () => {
                 name="title"
                 label="Titulo"
                 color="ligth"
-                required
+                isRequired
                 type="text"
                 placeholder="Titulo"
               />
               <Input
                 name="href"
                 label="Link"
-                required
+                isRequired
                 color="ligth"
                 type={"url"}
                 placeholder="Link"
