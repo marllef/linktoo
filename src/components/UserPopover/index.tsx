@@ -1,13 +1,8 @@
 import { Avatar } from "~/components/Avatar";
 import { useAuth } from "~/hooks/useAuth";
+
 import {
-  Box,
-  Button,
   Center,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -31,7 +26,7 @@ export const UserPopover = () => {
     <Popover placement="bottom-end">
       <PopoverTrigger>
         <button className={styles.trigger}>
-          <Avatar name={user?.displayName!} />
+          <Avatar name={user?.displayName!} src={data?.photoUrl!} />
           <span className={styles.trigger_user_name}>
             <Skeleton isLoaded={!loading}>
               {user?.displayName!.split(" ")[0] || "Buscando..."}

@@ -33,11 +33,8 @@ const Profile: NextPage = () => {
         <title>
           Profile | {user?.displayName?.split(" ")[0] || "Buscando..."}
         </title>
-        <meta name="description" content="Link my world" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <HeaderBar />
-      
     </>
   );
 };

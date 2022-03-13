@@ -43,8 +43,6 @@ const Login: NextPage = () => {
     <>
       <Head>
         <title>Realizar Login</title>
-        <meta name="description" content="Link my world" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div className={styles.container}>

@@ -11,7 +11,6 @@ import { LinkArea } from "~/components/LinkArea";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { PrismaClient } from "@prisma/client";
 import { Box, Text } from "@chakra-ui/react";
-import { useAuth } from "~/hooks/useAuth";
 
 const prisma = new PrismaClient();
 

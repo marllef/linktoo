@@ -30,10 +30,8 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>
-          Link-me | {user?.displayName?.split(" ")[0] || "Buscando..."}
+          Meus Links | {user?.displayName?.split(" ")[0] || "Buscando..."}
         </title>
-        <meta name="description" content="Link my world" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <HeaderBar tabs={["Links", "Configurações"]} />
