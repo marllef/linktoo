@@ -26,6 +26,22 @@ export default async function handler(
         res.status(200).json(links);
         break;
 
+      case "PUT":
+        const { photoUrl, username } = JSON.parse(req.body);
+        const updated = await prisma.user.update({
+          where: {
+            email: `${email}`,
+          },
+          data: {
+            photoUrl,
+            
+            username,
+          },
+        });
+
+        res.status(201).json(updated);
+        break;
+
       default:
         res.status(404);
     }

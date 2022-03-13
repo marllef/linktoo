@@ -24,6 +24,26 @@ export const useLinks = () => {
   };
 };
 
+export const useUsers = () => {
+  const { data, error, isValidating } = useSWR(
+    `/api/auth/`,
+    async (...args) => {
+      const response = await fetch(...args);
+      const users: User[] = await response.json();
+      return users;
+    },
+    {
+      refreshInterval: 5000,
+    }
+  );
+
+  return {
+    users: data!,
+    error,
+    isValidating,
+  };
+};
+
 export const createLink = async (data: Link, user: any) => {
   const response = await fetch("/api/database/links", {
     method: "POST",
@@ -64,4 +84,14 @@ export const getLinksByUsername = async (username: string) => {
       username,
     }),
   });
+};
+
+export const getUserByEmail = async (email: string) => {
+  try {
+    const response = await fetch(`/api/auth/${email}`);
+    const data: User = await response.json();
+    return data;
+  } catch (err: any) {
+    console.log(err.message);
+  }
 };

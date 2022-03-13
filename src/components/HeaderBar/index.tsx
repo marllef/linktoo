@@ -1,20 +1,26 @@
 import styles from "./HeaderBar.module.css";
-import { HStack, Tab, TabList } from "@chakra-ui/react";
+import { Box, HStack, Tab, TabList } from "@chakra-ui/react";
 import { UserPopover } from "../UserPopover";
 import { useAuth } from "~/hooks/useAuth";
 
-export const HeaderBar = () => {
+interface Props {
+  showTabs?: boolean;
+  tabs?: string[];
+}
+
+export const HeaderBar = ({ showTabs = false, tabs = [] }: Props) => {
   return (
     <HStack className={styles.header_bar}>
       <div className="hidden sm:flex">LinkMe</div>
-      <div className="flex justify-center items-center">
+      <Box hidden={showTabs} className={styles.nav}>
         <TabList>
           <HStack>
-            <Tab>Links</Tab>
-            <Tab>Configurações</Tab>
+            {(tabs || []).map((item) => (
+              <Tab key={item}>{item}</Tab>
+            ))}
           </HStack>
         </TabList>
-      </div>
+      </Box>
 
       <div>
         <UserPopover />

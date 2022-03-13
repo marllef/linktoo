@@ -16,23 +16,24 @@ export default async function handler(
       case "GET":
         const users = await prisma.user.findFirst({
           where: {
-            uid: `${email}`,
+            email: `${email}`,
           },
         });
 
         res.status(200).json(users);
         break;
+
       case "DELETE":
         const delUser = await prisma.user.delete({
           where: {
-            uid: `${email}`,
+            email: `${email}`,
           },
         });
 
         res.status(200).json(delUser);
         break;
       default:
-        res.status(200);
+        res.status(404);
     }
   } catch (err: any) {
     console.log(err.message);

@@ -1,8 +1,14 @@
-import { InputHTMLAttributes, ReactNode, useEffect, useRef } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   Box,
   Input as CKInput,
-  InputAddon,
   InputGroup,
   InputProps,
   InputRightAddon,
@@ -11,25 +17,27 @@ import {
 } from "@chakra-ui/react";
 import { useField } from "@unform/core";
 import styles from "./Input.module.css";
+import { CheckIcon } from "~/components/CheckIcon";
 
 interface Props extends InputProps {
   label?: string;
   name: string;
+  status?: boolean | null;
   isLoading?: boolean;
   rightElement?: ReactNode;
 }
 
-export const Input = ({
+export const UsernameInput = ({
   label,
   color,
   className,
-  rightElement,
   isLoading,
+  status = false,
   variant = "filled",
   name,
   ...rest
 }: Props) => {
-  const { fieldName, defaultValue, registerField } = useField(name);
+  const { fieldName, registerField } = useField(name);
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -63,11 +71,13 @@ export const Input = ({
         />
 
         {isLoading ? (
-          <InputRightElement>
+          <InputRightAddon>
             <Spinner color="sky.500" />
-          </InputRightElement>
+          </InputRightAddon>
         ) : (
-          <InputRightElement>{rightElement}</InputRightElement>
+          <InputRightAddon>
+            <CheckIcon status={status!} />
+          </InputRightAddon>
         )}
       </InputGroup>
     </Box>

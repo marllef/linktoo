@@ -3,6 +3,7 @@ import "../styles/globals.css";
 
 import type { AppProps } from "next/app";
 import {
+  Box,
   ChakraProvider as Chakra,
   TabPanel,
   TabPanels,
@@ -15,14 +16,11 @@ import { HeaderBar } from "~/components/HeaderBar";
 import { LinkPanel } from "~/components/Panel/LinkPanel";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const size = useBreakpointValue({ sm: "md", md: "sm", lg: "sm" });
-
   return (
     <Chakra theme={theme}>
       <AuthProvider>
         <Tabs
-          size={size}
-          className="flex h-screen overflow-hidden bg-slate-100 min-w-[20rem]"
+          className="bg-slate-100 h-screen"
           variant="simple-rounded"
           colorScheme="slate"
         >

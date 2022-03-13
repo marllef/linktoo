@@ -8,6 +8,8 @@ import {
   User,
 } from "firebase/auth";
 
+import { User as DBUser } from "@prisma/client";
+
 import nookies from "nookies";
 
 const auth = getAuth();
@@ -32,7 +34,7 @@ export const AuthServices = {
 
     try {
       const { user } = await signInWithPopup(auth, provider);
-      
+
       await fetch("/api/auth", {
         method: "POST",
         body: JSON.stringify({
@@ -50,6 +52,25 @@ export const AuthServices = {
     } catch (err: any) {
       console.log("ERRO:", err.message);
       throw new Error(err.message);
+    }
+  },
+
+  updateUser: async (
+    user: User,
+    updates: { username: string; photoUrl: string }
+  ) => {
+    try {
+      const response = await fetch(`/api/database/users/${user.email}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          ...updates,
+        }),
+      });
+      const updated: DBUser = await response.json();
+
+      return updated;
+    } catch (err: any) {
+      console.log(err.message);
     }
   },
 

@@ -22,8 +22,10 @@ import {
 import { Item } from "./Item";
 import { MdArrowDropDown as Icon } from "react-icons/md";
 import styles from "./UserPopover.module.css";
+import { useRouter } from "next/router";
 
 export const UserPopover = () => {
+  const router = useRouter();
   const { user, signOut, loading } = useAuth();
   return (
     <Popover placement="bottom-end">
@@ -55,7 +57,9 @@ export const UserPopover = () => {
           <PopoverBody>
             <Item>Perfil</Item>
             <Item>Links</Item>
-            <Item>Preferências</Item>
+            <Item onClick={() => router.push("/preferences")}>
+              Preferências
+            </Item>
             <Item>Estatísticas</Item>
           </PopoverBody>
           <PopoverFooter>

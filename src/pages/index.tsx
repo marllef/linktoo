@@ -18,7 +18,6 @@ import { Tabs } from "~/components/Tabs";
 
 const Home: NextPage = () => {
   const { user, loading } = useAuth();
-  const size = useBreakpointValue({ sm: "md", md: "sm", lg: "sm" });
   const router = useRouter();
 
   useEffect(() => {
@@ -37,23 +36,16 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Tabs
-        size={size}
-        className="flex h-screen overflow-hidden bg-slate-100 min-w-[20rem]"
-        variant="simple-rounded"
-        colorScheme="slate"
-      >
-        <HeaderBar />
+      <HeaderBar tabs={["Links", "Configurações"]} />
 
-        <TabPanels className="h-full pt-14">
-          <TabPanel h="full">
-            <LinkPanel />
-          </TabPanel>
-          <TabPanel>
-            <p>Configuração</p>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+      <TabPanels className="h-full pt-12 overflow-hidden">
+        <TabPanel className="h-full">
+          <LinkPanel />
+        </TabPanel>
+        <TabPanel>
+          <p>Configuração</p>
+        </TabPanel>
+      </TabPanels>
     </>
   );
 };

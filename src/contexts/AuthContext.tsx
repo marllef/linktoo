@@ -1,15 +1,20 @@
-import { User } from "firebase/auth";
+import { User as DBUser } from "@prisma/client";
+import { User as FBUser } from "firebase/auth";
+
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { getUserByEmail } from "~/hooks/fetcher";
 import { AuthServices } from "~/services/AuthServices";
 
 interface AuthContextTypes {
-  user: User | null;
+  user: FBUser | null;
+  data?: DBUser;
   loading: boolean;
-  signIn: { (email: string, password: string): Promise<User> };
-  signInWithGoogle: { (): Promise<User> };
+  signIn: { (email: string, password: string): Promise<FBUser> };
+  signInWithGoogle: { (): Promise<FBUser> };
   createUser: {
-    (name: string, email: string, password: string): Promise<User>;
+    (name: string, email: string, password: string): Promise<FBUser>;
   };
+  updateUserData: { (user: FBUser, changes: any): Promise<DBUser> };
   signOut: { (): Promise<void> };
 }
 
@@ -20,12 +25,17 @@ interface Props {
 export const AuthContext = createContext<AuthContextTypes | null>(null);
 
 export const AuthProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<FBUser | null>(null);
+  const [data, setData] = useState<DBUser>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AuthServices.onAuthChange((user) => {
+    AuthServices.onAuthChange(async (user) => {
       setUser(user);
+      if (user) {
+        const userData = await getUserByEmail(user.email!);
+        setData(userData);
+      }
       setLoading(false);
     });
   }, []);
@@ -48,6 +58,11 @@ export const AuthProvider = ({ children }: Props) => {
     return currentUser;
   }
 
+  async function updateUserData(user: FBUser, changes: any) {
+    const updatedUser = await AuthServices.updateUser(user, changes);
+    return updatedUser!;
+  }
+
   async function signOut() {
     await AuthServices.signOut();
     setLoading(false);
@@ -56,11 +71,13 @@ export const AuthProvider = ({ children }: Props) => {
 
   const value = {
     user,
+    data,
     loading,
     signIn,
     signInWithGoogle,
     signOut,
     createUser,
+    updateUserData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

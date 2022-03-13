@@ -3,6 +3,7 @@ import type {
   SystemStyleObject,
   SystemStyleFunction,
 } from "@chakra-ui/theme-tools";
+import { ring } from "@chakra-ui/react";
 
 const baseStyle: SystemStyleObject = {
   lineHeight: "1.2",
@@ -146,6 +147,10 @@ const variantSolid: SystemStyleFunction = (props) => {
       _disabled: {
         bg: background,
       },
+    },
+    _focus: {
+      ring: 2,
+      ringColor: "blue.300",
     },
     _active: { bg: mode(activeBg, `${c}.400`)(props) },
   };

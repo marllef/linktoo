@@ -6,8 +6,15 @@ import { useAuth } from "~/hooks/useAuth";
 import nookies from "nookies";
 
 import {
+  Box,
+  Flex,
+  HStack,
+  Text,
   useBreakpointValue,
+  VStack,
 } from "@chakra-ui/react";
+import { HeaderBar } from "~/components/HeaderBar";
+import { Avatar } from "~/components/Avatar";
 
 const Profile: NextPage = () => {
   const { user, loading } = useAuth();
@@ -29,7 +36,7 @@ const Profile: NextPage = () => {
         <meta name="description" content="Link my world" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <HeaderBar />
       
     </>
   );
