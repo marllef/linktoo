@@ -5,20 +5,11 @@ import { useEffect } from "react";
 import { useAuth } from "~/hooks/useAuth";
 import nookies from "nookies";
 
-import {
-  Box,
-  Flex,
-  HStack,
-  Text,
-  useBreakpointValue,
-  VStack,
-} from "@chakra-ui/react";
+
 import { HeaderBar } from "~/components/HeaderBar";
-import { Avatar } from "~/components/Avatar";
 
 const Profile: NextPage = () => {
   const { user, loading } = useAuth();
-  const size = useBreakpointValue({ sm: "md", md: "sm", lg: "sm" });
   const router = useRouter();
 
   useEffect(() => {
