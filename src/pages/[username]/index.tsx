@@ -61,6 +61,7 @@ const UserLinks = ({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { username } = context.query;
 
+  
   try {
     const { links, photoUrl, instagram, facebook, twitter } =
       await prisma.user.findUnique({
