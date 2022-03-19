@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import { User as DBUser } from "@prisma/client";
 import { User as FBUser } from "firebase/auth";
 
@@ -10,7 +11,7 @@ interface AuthContextTypes {
   data?: DBUser;
   loading: boolean;
   signIn: { (email: string, password: string): Promise<FBUser> };
-  signInWithGoogle: { (): Promise<FBUser> };
+  signInWithGoogle: { (): Promise<FBUser | null> };
   createUser: {
     (name: string, email: string, password: string): Promise<FBUser>;
   };
@@ -28,6 +29,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<FBUser | null>(null);
   const [data, setData] = useState<DBUser>();
   const [loading, setLoading] = useState(true);
+  const toast = useToast();
 
   useEffect(() => {
     AuthServices.onAuthChange(async (user) => {
@@ -47,9 +49,17 @@ export const AuthProvider = ({ children }: Props) => {
   }
 
   async function signInWithGoogle() {
-    const currentUser = await AuthServices.loginWithGoogle();
-    setUser(currentUser);
-    return currentUser;
+    try {
+      const currentUser = await AuthServices.loginWithGoogle();
+      setUser(currentUser);
+      return currentUser;
+    } catch (err: any) {
+      toast({
+        title: "Erro de autenticação.",
+        description: err.message,
+      });
+      return null;
+    }
   }
 
   async function createUser(name: string, email: string, password: string) {
