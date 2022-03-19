@@ -44,6 +44,8 @@ export const AuthServices = {
         }),
       });
 
+      nookies.destroy(null, "USER_AUTHENTICATED");
+
       nookies.set(null, "USER_AUTHENTICATED", "TRUE", {
         maxAge: 60 * 60 * 24 * 30, // 30 days
       });
@@ -91,6 +93,8 @@ export const AuthServices = {
         }),
       });
 
+      nookies.destroy(null, "USER_AUTHENTICATED");
+      
       nookies.set(null, "USER_AUTHENTICATED", "TRUE", {
         maxAge: 60 * 60 * 24 * 30, // 30 days
       });
