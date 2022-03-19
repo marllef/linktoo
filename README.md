@@ -27,6 +27,11 @@ _Siga o passo-a-passo para instalar o projeto em sua máquina._
 ```
 3. Adicione as variaveis de ambiente necessárias seguindo o exemplo do arquivo `.env.example`.
 
+4. Gere os modelos do `Prisma Client` com o seguinte comando:
+```sh
+   npm prisma generate
+```
+
 ### Utilização
 
 _Para iniciar o servidor local execute o seguinte comando:_
