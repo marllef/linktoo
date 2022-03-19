@@ -7,8 +7,12 @@ import { AuthProvider } from "~/contexts/AuthContext";
 import theme from "~/theme";
 import { Tabs } from "~/components/Tabs";
 import Head from "next/head";
+import { CookieConsent } from "~/components/CookieConsent";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  const { username } = router.query;
   return (
     <Chakra theme={theme}>
       <Head>
@@ -24,6 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         >
           <Component {...pageProps} />
         </Tabs>
+        {typeof username === "undefined" && <CookieConsent />}
       </AuthProvider>
     </Chakra>
   );
