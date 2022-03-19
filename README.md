@@ -1,5 +1,3 @@
-## Sobre o Projeto
-
 ## Getting Started
 
 _Para executar este projeto localmente siga estas simples etapas._
