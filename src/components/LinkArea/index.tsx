@@ -21,7 +21,6 @@ interface Props {
 }
 
 export const LinkArea = ({ links }: Props) => {
-  const fontSize = useBreakpointValue({ sm: "2xl", md: "lg" });
   return (
     <div className="flex flex-col justify-start w-full h-full px-8 lg:px-96 xl:px-[35rem]">
       {(links || []).map(
