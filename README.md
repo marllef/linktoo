@@ -21,16 +21,16 @@ Estas são as tecnologias utilizadas na elaboração deste projeto.
 
 ## Telas do Aplicativo
 
-A seguir estão algumas das telas do app.
-
 <div align='center'>
+
+A seguir estão algumas das telas do app.
 
 <img src="public/img/LinkToo(1).png" alt='Tela de login'  width="200">
 <img src="public/img/LinkToo(3).png" alt='Tela principal'  width="200">
 <img src="public/img/LinkToo(6).png" alt="Editar perfil"  width="200">
 <img src="public/img/LinkToo(5).png" alt="Listagem de links" width="200">
 
-_Telas internas do aplicativo_
+_Imagem 1 - Telas internas do aplicativo._
 
 </div>
 
@@ -42,7 +42,7 @@ _Telas internas do aplicativo_
 
 ## Pré-requisitos
 
-Antes de iniciar é necessário ter o yarn instalado.
+Antes de iniciar é necessário ter o `yarn` instalado.
 
 ```sh
 npm install -g yarn@latest
