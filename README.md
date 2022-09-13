@@ -1,23 +1,42 @@
-# LinkToo
+# 🔗 [LinkToo](http://linktoo.tk) - Agregador de Links
+
+Um simples agregador de links para utilizar em redes sociais. 
+
+## 🏷️ Tecnologias Utilizadas
 
 <div align='center'>
 
-Agregador de links simples para utilização em redes sociais.
+  ![NextJS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+  ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+  ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+
+  <img src='https://img.shields.io/badge/Firebase-F29D0C?style=for-the-badge&logo=firebase&logoColor=white'>
+  <img src='https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white'>
+</div>
+
+## 🎨 Telas do Aplicativo
+
+<div></div>
+<div align='center'>
 
 <img src="public/img/LinkToo(1).png" alt='Tela de login'  width="200">
 <img src="public/img/LinkToo(3).png" alt='Tela principal'  width="200">
-<img src="public/img/LinkToo(6).png" alt="Adicionar link"  width="200">
+<img src="public/img/LinkToo(6).png" alt="Editar perfil"  width="200">
 <img src="public/img/LinkToo(5).png" alt="Listagem de links" width="200">
 
 _Telas internas do aplicativo_
 
 </div>
 
-## Informações
+# ⚠️ Informações Importantes ⚠️
 
-_Para executar este projeto localmente siga as etapas descritas neste documento._
+- Este projeto pode ser acessado em produção [clicando aqui](http://linktoo.tk).
 
-### Pré-requisitos
+- Para executar este projeto localmente siga as etapas descritas neste documento.
+
+
+## Pré-requisitos
 
 Antes de iniciar é necessário ter o yarn instalado.
 
@@ -57,7 +76,7 @@ _Siga o passo-a-passo para instalar o projeto em sua máquina._
    yarn dev
 ```
 
-## Licença
+## 📃 Licença
 
 Este projeto está sob licença MIT.
 
