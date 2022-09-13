@@ -1,23 +1,28 @@
-# 🔗 [LinkToo](http://linktoo.tk) - Agregador de Links
+# 🔗 [LinkToo](http://linktoo.tk) - Agregador de Links 🔗
 
-Um simples agregador de links para utilizar em redes sociais. 
+Um simples agregador de links para utilizar em redes sociais.
 
-## 🏷️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 <div align='center'>
 
-  ![NextJS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
-  ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-  ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+Estas são as tecnologias utilizadas na elaboração deste projeto.
 
-  <img src='https://img.shields.io/badge/Firebase-F29D0C?style=for-the-badge&logo=firebase&logoColor=white'>
-  <img src='https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white'>
+![NextJS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCss](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-F29D0C?style=for-the-badge&logo=firebase&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+
 </div>
 
-## 🎨 Telas do Aplicativo
+## Telas do Aplicativo
 
-<div></div>
+A seguir estão algumas das telas do app.
+
 <div align='center'>
 
 <img src="public/img/LinkToo(1).png" alt='Tela de login'  width="200">
@@ -34,7 +39,6 @@ _Telas internas do aplicativo_
 - Este projeto pode ser acessado em produção [clicando aqui](http://linktoo.tk).
 
 - Para executar este projeto localmente siga as etapas descritas neste documento.
-
 
 ## Pré-requisitos
 
@@ -76,8 +80,8 @@ _Siga o passo-a-passo para instalar o projeto em sua máquina._
    yarn dev
 ```
 
-## 📃 Licença
+## Licença
 
-Este projeto está sob licença MIT.
+Este projeto está licenciado sob licença do MIT.
 
 Copyright (c) 2022 [Marllef Hyorrane Alves De Freitas](http://github.com/marllef)
