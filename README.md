@@ -6,7 +6,7 @@ Agregador de links simples para utilização em redes sociais.
 
 <img src="public/img/LinkToo(1).png" alt='Tela de login'  width="200">
 <img src="public/img/LinkToo(3).png" alt='Tela principal'  width="200">
-<img src="public/img/LinkToo(4).png" alt="Adicionar link"  width="200">
+<img src="public/img/LinkToo(6).png" alt="Adicionar link"  width="200">
 <img src="public/img/LinkToo(5).png" alt="Listagem de links" width="200">
 
 _Telas internas do aplicativo_
